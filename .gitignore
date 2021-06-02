@@ -1,5 +1,6 @@
 # Jupyter notebook files:
 *.ipynb
+.ipynb_checkpoints
 
 # Pycache
 *.pyc
