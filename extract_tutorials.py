@@ -1,5 +1,3 @@
-# Input: URL
-# Output: list of tutorials
 import pandas as pd
 import tensorflow as tf
 from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -64,5 +62,3 @@ def predict_tutorials_from_url(url):
   result['predicted'] = predicted
 
   return result[result['predicted'] > 0.5]['sentences'].to_list()
-
-print(predict_tutorials_from_url(constants.URL_TEST))
