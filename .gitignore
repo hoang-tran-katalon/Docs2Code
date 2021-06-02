@@ -1,2 +1,6 @@
 # Jupyter notebook files:
 *.ipynb
+
+# Pycache
+*.pyc
+__pycache__
