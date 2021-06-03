@@ -1,0 +1,1 @@
+<Start> => Navigate the main page => Click Settings => Type the new name => <End>

@@ -1,29 +1,17 @@
 import spacy
+from datetime import datetime
 
-import extract_tutorials
+import extract_tutorials, template_generation
 import constants
 
 nlp = spacy.load("en_core_web_md")
 
 if __name__ == "__main__":
     headline, tutorials = extract_tutorials.predict_tutorials_from_url(constants.URL_TEST)
+    template_string = template_generation.generate_template_dependency_parsing(tutorials)
     
-    template = []
-    template_string = '<Start> => '
-
-    for tutorial in tutorials:
-        tutorial = tutorial.replace('to ', '').replace(',', '')
-        doc = nlp(tutorial)
-        
-        for chunk in list(doc.noun_chunks):
-            if chunk.root.dep_ in ['dobj', 'nsubj'] and chunk.root.head.dep_ in ['ROOT', 'conj', 'advcl']:
-                result = (chunk.root.head.text.capitalize(), chunk.text)
-                template.append(result)
-                template = [item for item in template if item[0] not in ['Receive', 'Is', 'Happen']]
-                
-                template_string+=chunk.root.head.text.capitalize()+' '+chunk.text
-                template_string+=' => '
-
-    template_string+='<End>'
+    f = open("./output/[Template] {}.txt".format(headline), "a")
+    f.write(template_string)
+    f.close()
     print(headline)
     print(template_string)

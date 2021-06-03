@@ -65,6 +65,6 @@ def predict_tutorials_from_url(url):
   result['sentences'] = sentences
   result['predicted'] = predicted
 
-  print(result)
+  # print(result)
 
   return headline, result[result['predicted'] > 0.3]['sentences'].to_list()
